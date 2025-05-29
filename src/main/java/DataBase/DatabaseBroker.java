@@ -21,7 +21,7 @@ public class DatabaseBroker {
     public DatabaseBroker() {
         this.setDatabaseAccessParams();
     }
-
+    
     private void setDatabaseAccessParams() {
         try {
             Properties properties = new Properties();

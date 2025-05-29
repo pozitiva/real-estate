@@ -507,12 +507,12 @@ public class Controller {
         }
     }
     
-     public void updateAdresa(Adresa a) throws Exception {
+     public void updateAdresa(Adresa a, String setClause) throws Exception {
         try {
             db.connect();
             int answer = JOptionPane.showConfirmDialog(null, "Zelite li da izmenite nalog?", "Izmena", JOptionPane.YES_NO_OPTION);
             if (answer == JOptionPane.YES_OPTION) {
-                db.update(a);
+                db.updatePartial(a, setClause);
                 JOptionPane.showMessageDialog(null, "Uspesno ste izmenili");
             }
         } catch (Exception ex) {

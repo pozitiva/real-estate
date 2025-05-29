@@ -19,7 +19,7 @@ public class formGrad extends javax.swing.JFrame {
     List<Grad> pronadjeniGradovi = new LinkedList<>();
     List<Adresa> adrese = new LinkedList<>();
     List<Adresa> pronadjeneAdrese = new LinkedList<>();
-    private final HashMap<Integer, String[]> originalnaVrednostAdrese = new HashMap<>();
+    private final HashMap<Integer, String[]> originalneVrednostiAdrese = new HashMap<>();
 
     
     public formGrad() throws Exception {
@@ -44,7 +44,7 @@ public class formGrad extends javax.swing.JFrame {
             String ulicaBroj = (String) model.getValueAt(i, 2);
             String nazivGrada = (String) model.getValueAt(i, 3);
 
-            originalnaVrednostAdrese.put(i, new String[]{String.valueOf(adresaID), String.valueOf(gradID), ulicaBroj, nazivGrada});
+            originalneVrednostiAdrese.put(i, new String[]{String.valueOf(adresaID), String.valueOf(gradID), ulicaBroj, nazivGrada});
         }
     }
 
@@ -120,12 +120,48 @@ public class formGrad extends javax.swing.JFrame {
         }
     }
 
-    private void popuniFormuAdresom(Adresa a) {
-        txtAdresaID.setText(String.valueOf(a.getAdresaID()));
-        txtUlicaBroj.setText(a.getUlicaIBroj());
-        txtGrad.setText(a.getNazivGrada());
-    }
+//    private void popuniFormuAdresom(Adresa a) {
+//        txtAdresaID.setText(String.valueOf(a.getAdresaID()));
+//        txtUlicaBroj.setText(a.getUlicaIBroj());
+//        //txtGrad.setText(a.getNazivGrada());
+//    }
 
+    private String generisiSetKlauzuAdrese(JTable table, int selectedRow) {
+        DefaultTableModel model = (DefaultTableModel) table.getModel();
+        StringBuilder setClause = new StringBuilder(" ");
+
+        Integer gradID = (Integer) model.getValueAt(selectedRow, 1);
+        String ulicaBroj = (String) model.getValueAt(selectedRow, 2);
+        String nazivGrada = (String) model.getValueAt(selectedRow, 3);
+        
+        String[] original = originalneVrednostiAdrese.get(selectedRow);
+        
+        String originalGradID = original[1];
+        String gradIDString = gradID.toString();
+        
+        String originalUlicaBroj = original[2];
+        String originalNazivGrada = original[3];
+               
+        boolean needComma = false;
+
+        if(!gradIDString.equals(originalGradID)) {
+            setClause.append("GRADID = '").append(gradIDString).append("'");
+            needComma = true;
+        }
+        if(!ulicaBroj.equals(originalUlicaBroj)){
+            setClause.append("ULICABROJ = '").append(ulicaBroj).append("'");
+            needComma=true;
+        }
+        if(!nazivGrada.equals(originalNazivGrada)){
+            if(needComma){
+                setClause.append(", ");
+            }
+            setClause.append("NAZIVGRADA = '").append(nazivGrada).append("'");
+        }
+
+        return setClause.toString();
+    }
+    
     private void setUpTableListenerGrad() {
         tblGrad.getSelectionModel().addListSelectionListener((ListSelectionEvent event) -> {
             if (!event.getValueIsAdjusting()) {
@@ -138,7 +174,7 @@ public class formGrad extends javax.swing.JFrame {
                     }
                     
                     popuniTabeluAdresama(izabranGrad.getGradID());
-                    originalnaVrednostAdrese.clear();
+                    originalneVrednostiAdrese.clear();
                     sacuvajOriginalneVrednosti(tblAdrese);
                 } catch (Exception ex) {
                     Logger.getLogger(formGrad.class.getName()).log(Level.SEVERE, null, ex);
@@ -158,7 +194,7 @@ public class formGrad extends javax.swing.JFrame {
                         izabranaAdresa = pronadjeneAdrese.get(0);
                     }
                     
-                    popuniFormuAdresom(izabranaAdresa);
+                    //popuniFormuAdresom(izabranaAdresa);
                 } catch (Exception ex) {
                     Logger.getLogger(formGrad.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -193,8 +229,6 @@ public class formGrad extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         txtAdresaID = new javax.swing.JTextField();
         txtUlicaBroj = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
-        txtGrad = new javax.swing.JTextField();
         btnIzmeniGrad = new javax.swing.JButton();
         btnSacuvaj = new javax.swing.JButton();
         btnIzmeni = new javax.swing.JButton();
@@ -240,8 +274,6 @@ public class formGrad extends javax.swing.JFrame {
                 txtAdresaIDActionPerformed(evt);
             }
         });
-
-        jLabel4.setText("Grad");
 
         btnIzmeniGrad.setText("Izmeni");
         btnIzmeniGrad.addActionListener(new java.awt.event.ActionListener() {
@@ -306,14 +338,12 @@ public class formGrad extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4))
+                            .addComponent(jLabel3))
                         .addGap(25, 25, 25)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(txtAdresaID, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtUlicaBroj, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtGrad, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(133, 133, 133)
+                            .addComponent(txtUlicaBroj, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(141, 141, 141)
                         .addComponent(btnSacuvaj))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -342,26 +372,26 @@ public class formGrad extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(104, 104, 104)
                         .addComponent(btnIzmeniGrad)))
-                .addGap(44, 44, 44)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(txtAdresaID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtUlicaBroj, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3)
-                    .addComponent(btnSacuvaj))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtGrad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(34, 34, 34)
+                        .addGap(46, 46, 46)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txtAdresaID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtUlicaBroj, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(64, 64, 64)
+                        .addComponent(btnSacuvaj)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(39, 39, 39)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(44, Short.MAX_VALUE))
+                        .addContainerGap(28, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 103, Short.MAX_VALUE)
                         .addComponent(btnObrisi)
                         .addGap(36, 36, 36)
                         .addComponent(btnIzmeni)
@@ -379,7 +409,7 @@ public class formGrad extends javax.swing.JFrame {
 
             //Adresa adresa = jeIzabranaAdresa();
 
-            popuniTabeluAdresama(tblGrad.getSelectedRow());
+            popuniTabeluAdresama(a.getGradID());
         } catch (Exception ex) {
             Logger.getLogger(formGrad.class.getName()).log(Level.SEVERE, null, ex);
             JOptionPane.showMessageDialog(null, "Doslo je do greske: " + ex.getMessage(), "Greska", JOptionPane.ERROR_MESSAGE);
@@ -402,8 +432,11 @@ public class formGrad extends javax.swing.JFrame {
     private void btnIzmeniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIzmeniActionPerformed
         try {
             Adresa a = jeIzabranaAdresa();
-            Controller.getInstance().updateAdresa(a);
-            ucitajAdrese();
+            String setClause = generisiSetKlauzuAdrese(tblAdrese, tblAdrese.getSelectedRow());
+            
+            Controller.getInstance().updateAdresa(a, setClause);
+            //ucitajAdrese();
+            popuniTabeluAdresama(a.getGradID());
         } catch (Exception ex) {
             Logger.getLogger(formGrad.class.getName()).log(Level.SEVERE, null, ex);
             JOptionPane.showMessageDialog(null, "Doslo je do greske: " + ex.getMessage(), "Greska", JOptionPane.ERROR_MESSAGE);
@@ -436,13 +469,11 @@ public class formGrad extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable tblAdrese;
     private javax.swing.JTable tblGrad;
     private javax.swing.JTextField txtAdresaID;
-    private javax.swing.JTextField txtGrad;
     private javax.swing.JTextField txtUlicaBroj;
     // End of variables declaration//GEN-END:variables
 }

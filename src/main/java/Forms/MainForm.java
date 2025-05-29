@@ -6,9 +6,7 @@ import javax.swing.JOptionPane;
 
 public class MainForm extends javax.swing.JFrame {
 
-    /**
-     * Creates new form MainForm
-     */
+
     public MainForm() {
         initComponents();
         setTitle("Glavna forma");
