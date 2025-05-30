@@ -34,7 +34,7 @@ public class MainForm extends javax.swing.JFrame {
 
         itemFormDoznaka.setText("Izaberi formu");
 
-        jMenuItem2.setText("Doznaka");
+        jMenuItem2.setText("Potvrda");
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem2ActionPerformed(evt);
@@ -67,7 +67,6 @@ public class MainForm extends javax.swing.JFrame {
         itemFormDoznaka.add(jMenuItem5);
 
         jMenuItem6.setText("Grad");
-        jMenuItem6.setActionCommand("Grad");
         jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem6ActionPerformed(evt);
@@ -94,13 +93,13 @@ public class MainForm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        //try {
-           // formDoznaka fd = new formDoznaka();
-            //fd.setVisible(true);
-        //} catch (Exception ex) {
-           // Logger.getLogger(formZaposleni.class.getName()).log(Level.SEVERE, null, ex);
-          //  JOptionPane.showMessageDialog(null, "Došlo je do greške: " + ex.getMessage(), "Greška", JOptionPane.ERROR_MESSAGE);
-        //}
+        try {
+            formPotvrda fd = new formPotvrda();
+            fd.setVisible(true);
+        } catch (Exception ex) {
+            Logger.getLogger(formPotvrda.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Doslo je do greske: " + ex.getMessage(), "Greska", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed

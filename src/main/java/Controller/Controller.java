@@ -729,7 +729,7 @@ public class Controller {
     }
 
     // JAVNI BELEZNIK
-    public List<JavniBeleznik> loadSveJavneBeleznice() throws Exception {
+    public List<JavniBeleznik> loadSveJavneBeleznike() throws Exception {
         List<JavniBeleznik> javniBeleznici = new LinkedList<>();
         try {
             db.connect();
@@ -1001,6 +1001,22 @@ public class Controller {
         return potvrde;
     }
 
+        public void insertPotvrda (Potvrda p) throws Exception {
+        try {
+            db.connect();
+            db.insert(p);
+            JOptionPane.showMessageDialog(null, "Uspesno ste uneli");
+
+        } catch (Exception ex) {
+            throw ex;
+        } finally {
+            try {
+                db.disconnect();
+            } catch (Exception ex) {
+                Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
     public void updatePotvrda(Potvrda p, String setClause) throws Exception {
         try {
             db.connect();

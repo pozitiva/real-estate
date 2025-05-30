@@ -53,7 +53,7 @@ public class Potvrda extends DomainObject{
         this.opu = OPU;
     }
 
-    public int getUovorOKupoprodajiID() {
+    public int getUgovorOKupoprodajiID() {
         return ugovorOKupoprodajiID;
     }
 
@@ -80,7 +80,7 @@ public class Potvrda extends DomainObject{
     
     @Override
     public String getTableName() {
-       return "POTVRDA p";
+       return "IVA.POTVRDA p";
     }
 
     @Override
@@ -97,9 +97,9 @@ public class Potvrda extends DomainObject{
     public String getColumnValues() {
          SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yy");
          
-         String datumPotvrdeStr = datumPotvrde != null ? "TO_DATE('"+ sdf.format(datumPotvrde)+ "', 'DD-MM-YY')": "NULL";
+         String datumPotvrdeStr = datumPotvrde != null ? "TO_DATE('" + sdf.format(datumPotvrde) + "', 'DD-MM-YY')" : "NULL";
          
-         return String.format("%d, '%s', '%s', %d, %d, '%s'",
+         return String.format("%d, %s, '%s', %d, %d, '%s'",
                 potvrdaID,
                 datumPotvrdeStr,
                 opu,

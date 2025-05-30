@@ -58,16 +58,6 @@ public class formGrad extends javax.swing.JFrame {
         }
     }
 
-    private void ucitajAdrese() throws Exception {
-        DefaultTableModel model = (DefaultTableModel) tblAdrese.getModel();
-
-        adrese = Controller.getInstance().loadSveAdrese();
-
-        for (Adresa a : adrese) {
-            model.addRow(new Object[]{a.getAdresaID(), a.getGradID(), a.getUlicaIBroj(), a.getNazivGrada()});
-        }
-    }
-
     private Grad jeIzabranGrad() {
         int gradID = 0;
         String nazivGrada = null;
@@ -119,12 +109,6 @@ public class formGrad extends javax.swing.JFrame {
             model.addRow(new Object[]{a.getAdresaID(), a.getGradID(), a.getUlicaIBroj(), a.getNazivGrada()});
         }
     }
-
-//    private void popuniFormuAdresom(Adresa a) {
-//        txtAdresaID.setText(String.valueOf(a.getAdresaID()));
-//        txtUlicaBroj.setText(a.getUlicaIBroj());
-//        //txtGrad.setText(a.getNazivGrada());
-//    }
 
     private String generisiSetKlauzuAdrese(JTable table, int selectedRow) {
         DefaultTableModel model = (DefaultTableModel) table.getModel();
@@ -374,7 +358,7 @@ public class formGrad extends javax.swing.JFrame {
                         .addComponent(btnIzmeniGrad)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(46, 46, 46)
+                        .addGap(44, 44, 44)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(txtAdresaID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel2))
@@ -389,9 +373,9 @@ public class formGrad extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(39, 39, 39)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(28, Short.MAX_VALUE))
+                        .addContainerGap(80, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 103, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 155, Short.MAX_VALUE)
                         .addComponent(btnObrisi)
                         .addGap(36, 36, 36)
                         .addComponent(btnIzmeni)

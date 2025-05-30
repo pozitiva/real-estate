@@ -3,11 +3,13 @@ Forms\formGrad$3.class
 Controller\Controller.class
 domain\object\entities\KatastarskaParcela.class
 Forms\MainForm$4.class
+Forms\formPotvrda$1.class
 domain\object\entities\Agencija_Osnovno.class
 domain\object\entities\StavkaRezervacije.class
 domain\object\entities\UgovorOKupoprodaji.class
 domain\object\entities\Potvrda.class
 Forms\MainForm.class
+Forms\formPotvrda$2.class
 Forms\MainForm$1.class
 Forms\formGrad$6.class
 Forms\MainForm$6.class
@@ -30,5 +32,7 @@ Forms\formGrad$5.class
 Forms\MainForm$2.class
 domain\object\entities\Grad.class
 domain\object\entities\Adresa.class
+Forms\formPotvrda.class
 domain\object\DomainObject.class
 domain\object\entities\JavniBeleznik.class
+Forms\formPotvrda$3.class

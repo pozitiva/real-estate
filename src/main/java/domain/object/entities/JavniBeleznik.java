@@ -57,7 +57,7 @@ public class JavniBeleznik extends DomainObject{
     
     @Override
     public String getTableName() {
-        return "BELEZNIK";
+        return "IVA.JAVNIBELEZNIK";
     }
 
     @Override
