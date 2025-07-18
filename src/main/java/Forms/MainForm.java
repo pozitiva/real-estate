@@ -42,7 +42,7 @@ public class MainForm extends javax.swing.JFrame {
         });
         itemFormDoznaka.add(jMenuItem2);
 
-        jMenuItem3.setText("Nalog za isplatu");
+        jMenuItem3.setText("Nekretnina");
         jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem3ActionPerformed(evt);
@@ -103,13 +103,13 @@ public class MainForm extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-//        try {
-//            formNalogZaIsplatu fnzi = new formNalogZaIsplatu();
-//            fnzi.setVisible(true);
-//        } catch (Exception ex) {
-//            Logger.getLogger(formZaposleni.class.getName()).log(Level.SEVERE, null, ex);
-//            JOptionPane.showMessageDialog(null, "Došlo je do greške: " + ex.getMessage(), "Greška", JOptionPane.ERROR_MESSAGE);
-//        }
+        try {
+            formNekretnina fn = new formNekretnina();
+            fn.setVisible(true);
+        } catch (Exception ex) {
+            Logger.getLogger(formNekretnina.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Doslo je do greske: " + ex.getMessage(), "Greska", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
@@ -167,10 +167,8 @@ public class MainForm extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new MainForm().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new MainForm().setVisible(true);
         });
     }
 

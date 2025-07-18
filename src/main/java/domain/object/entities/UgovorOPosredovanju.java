@@ -13,13 +13,13 @@ public class UgovorOPosredovanju extends DomainObject {
     private int ugovorOPosredovanjuID;
     private Date datumPotpisivanja;
     private int nekretninaID;
-    private int brojParcele;
-    private int agencijaID;
+    private String brojParcele;
+    private String agencijaID;
 
     public UgovorOPosredovanju() {
     }
 
-    public UgovorOPosredovanju(int ugovorOPosredovanjuID, Date datumPotpisivanja, int nekretninaID, int brojParcele, int agencijaID) {
+    public UgovorOPosredovanju(int ugovorOPosredovanjuID, Date datumPotpisivanja, int nekretninaID, String brojParcele, String agencijaID) {
         this.ugovorOPosredovanjuID = ugovorOPosredovanjuID;
         this.datumPotpisivanja = datumPotpisivanja;
         this.nekretninaID = nekretninaID;
@@ -51,25 +51,25 @@ public class UgovorOPosredovanju extends DomainObject {
         this.nekretninaID = nekretninaID;
     }
 
-    public int getBrojParcele() {
+    public String getBrojParcele() {
         return brojParcele;
     }
 
-    public void setBrojParcele(int brojParcele) {
+    public void setBrojParcele(String brojParcele) {
         this.brojParcele = brojParcele;
     }
 
-    public int getAgencijaID() {
+    public String getAgencijaID() {
         return agencijaID;
     }
 
-    public void setAgencijaID(int agencijaID) {
+    public void setAgencijaID(String agencijaID) {
         this.agencijaID = agencijaID;
     }
     
     @Override
     public String getTableName() {
-       return "UGOVOROPOSREDOVANJU u";
+       return "IVA.UGOVOROPOSREDOVANJU u";
     }
 
     @Override
@@ -88,7 +88,7 @@ public class UgovorOPosredovanju extends DomainObject {
          
          String datumPotpisivanjaStr = datumPotpisivanja != null ? "TO_DATE('"+ sdf.format(datumPotpisivanja)+ "', 'DD-MM-YY')": "NULL";
          
-         return String.format("%d, '%s', %d, %d, %d",
+         return String.format("%d, %s, %d, '%s', '%s'",
                  ugovorOPosredovanjuID,
                  datumPotpisivanjaStr,
                  nekretninaID,
@@ -98,7 +98,15 @@ public class UgovorOPosredovanju extends DomainObject {
 
     @Override
     public String getUpdateClause() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yy");
+         
+        String datumPotpisivanjaStr = datumPotpisivanja != null ? "TO_DATE('"+ sdf.format(datumPotpisivanja)+ "', 'DD-MM-YY')": "NULL";
+         
+       return String.format("UGOVOROPOSREDOVANJUID=%d, DATUMPOTPISIVANJA=%s, NEKRETNINAID=%d, AGENCIJAID = '%s'",
+                 ugovorOPosredovanjuID,
+                 datumPotpisivanjaStr,
+                 nekretninaID,
+                 agencijaID);
     }
 
     @Override
@@ -113,7 +121,7 @@ public class UgovorOPosredovanju extends DomainObject {
 
     @Override
     public String getDeleteWhereClause() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+         return String.format("UGOVOROPOSREDOVANJUID = %d", this.getUgovorOPosredovanjuID());
     }
 
     @Override
@@ -124,8 +132,8 @@ public class UgovorOPosredovanju extends DomainObject {
              int ugovorOPosredovanjuID= rs.getInt("UGOVOROPOSREDOVANJUID");
              Date datumPotpisivanja = rs.getDate("DATUMPOTPISIVANJA");
              int nekretninaID= rs.getInt("NEKRETNINAID");
-             int brojParcele = rs.getInt("BROJPARCELE");
-             int agencijaID = rs.getInt("AGENCIJAID");
+             String brojParcele = rs.getString("BROJPARCELE");
+             String agencijaID = rs.getString("AGENCIJAID");
              
              ugovoriOPosredovanju.add(new UgovorOPosredovanju(ugovorOPosredovanjuID, datumPotpisivanja,nekretninaID, brojParcele, agencijaID));
          }

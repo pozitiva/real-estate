@@ -77,7 +77,7 @@ public class Agencija_Pogled extends DomainObject {
     
     @Override
     public String getTableName() {
-        return "AGENCIJA_POGLED";
+        return "IVA.AGENCIJA_POGLED";
     }
 
     @Override

@@ -8,7 +8,7 @@ import java.util.List;
 
 public class KatastarskaParcela extends DomainObject {
 
-    private int brojParcele;
+    private String brojParcele;
     private String katastarskaOpstina;
     private int brListNepokretnosti;
     private int adresaID;
@@ -17,7 +17,7 @@ public class KatastarskaParcela extends DomainObject {
     public KatastarskaParcela() {
     }
 
-    public KatastarskaParcela(int brojParcele, String katastarskaOpstina, int brListNepokretnosti, int adresaID, int gradID) {
+    public KatastarskaParcela(String brojParcele, String katastarskaOpstina, int brListNepokretnosti, int adresaID, int gradID) {
         this.brojParcele = brojParcele;
         this.katastarskaOpstina = katastarskaOpstina;
         this.brListNepokretnosti = brListNepokretnosti;
@@ -25,11 +25,11 @@ public class KatastarskaParcela extends DomainObject {
         this.gradID = gradID;
     }
 
-    public int getBrojParcele() {
+    public String getBrojParcele() {
         return brojParcele;
     }
 
-    public void setBrojParcele(int brojParcele) {
+    public void setBrojParcele(String brojParcele) {
         this.brojParcele = brojParcele;
     }
 
@@ -67,7 +67,7 @@ public class KatastarskaParcela extends DomainObject {
 
     @Override
     public String getTableName() {
-        return "KATASTARSKAPARCELA kp";
+        return "IVA.KATASTARSKAPARCELA kp";
     }
 
     @Override
@@ -82,7 +82,7 @@ public class KatastarskaParcela extends DomainObject {
 
     @Override
     public String getColumnValues() {
-        return String.format("%d, '%s', %d, %d, %d",
+        return String.format("'s', '%s', %d, %d, %d",
                 brojParcele,
                 katastarskaOpstina,
                 brListNepokretnosti,
@@ -102,7 +102,7 @@ public class KatastarskaParcela extends DomainObject {
 
     @Override
     public String getUpdateWhereClause() {
-        return String.format("BROJPARCELE = %d", this.getBrojParcele());
+        return String.format("BROJPARCELE = '%s'", this.getBrojParcele());
     }
 
     @Override
@@ -115,7 +115,7 @@ public class KatastarskaParcela extends DomainObject {
         List<DomainObject> parcele = new ArrayList<>();
 
         while (rs.next()) {
-            int brojParcele = rs.getInt("BROJPARCELE");
+            String brojParcele = rs.getString("BROJPARCELE");
             String katastarskaOpstina = rs.getString("KATASTARSKAOPSTINA");
             int brListNepokretnosti = rs.getInt("BRLISTNEPOKRETNOSTI");
             int adresaID = rs.getInt("ADRESAID");
@@ -131,4 +131,6 @@ public class KatastarskaParcela extends DomainObject {
     public String getOrderByColumn() {
         return "BROJPARCELE";
     }
+    
+    
 }

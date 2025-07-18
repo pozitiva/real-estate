@@ -417,14 +417,34 @@ public class Controller {
         }
     }
 
-    public void updateUgovorOPosredovanju(UgovorOPosredovanju up, String setClause) throws Exception {
+    public void updateUgovorOPosredovanju(UgovorOPosredovanju up) throws Exception {
         try {
             db.connect();
             int answer = JOptionPane.showConfirmDialog(null, "Zelite li da izmenite ugovor o posredovanju?", "Izmena", JOptionPane.YES_NO_OPTION);
             if (answer == JOptionPane.YES_OPTION) {
-                db.updatePartial(up, setClause);
+                db.update(up);
                 JOptionPane.showMessageDialog(null, "Uspesno ste izmenili");
             }
+        } catch (Exception ex) {
+            throw ex;
+        } finally {
+            try {
+                db.disconnect();
+            } catch (Exception ex) {
+                Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+    
+    public void deleteUgovorOPosredovanju(UgovorOPosredovanju u) throws Exception {
+        try {
+            db.connect();
+            int answer = JOptionPane.showConfirmDialog(null, "Zaista zelite da obrisete objekat?", "Brisanje", JOptionPane.YES_NO_OPTION);
+            if (answer == 1) {
+                return;
+            }
+            db.delete(u);
+
         } catch (Exception ex) {
             throw ex;
         } finally {
@@ -912,12 +932,12 @@ public class Controller {
         }
     }
 
-    public void updateNekretnina(Nekretnina n, String setClause) throws Exception {
+    public void updateNekretnina(Nekretnina n) throws Exception {
         try {
             db.connect();
             int answer = JOptionPane.showConfirmDialog(null, "Zelite li da izmenite nekretninu?", "Izmena", JOptionPane.YES_NO_OPTION);
             if (answer == JOptionPane.YES_OPTION) {
-                db.updatePartial(n, setClause);
+                db.update(n);
                 JOptionPane.showMessageDialog(null, "Uspesno ste izmenili");
             }
         } catch (Exception ex) {

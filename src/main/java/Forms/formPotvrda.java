@@ -95,10 +95,11 @@ public class formPotvrda extends javax.swing.JFrame {
                     if (pronadjenaPotvrda != null && !pronadjenaPotvrda.isEmpty()) {
                         izabranaPotvrda = pronadjenaPotvrda.get(0);
                     }
+                    
                     popuniFormuIzabranomPotvrdom(izabranaPotvrda);
                     
-                    originalneVrednostiBeleznika.clear();
-                    sacuvajOriginalneVrednosti(tblPotvrde);
+                    //originalneVrednostiBeleznika.clear();
+                    //sacuvajOriginalneVrednosti(tblPotvrde);
                 } catch (Exception ex) {
                     Logger.getLogger(formPotvrda.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -371,11 +372,16 @@ public class formPotvrda extends javax.swing.JFrame {
             String setClause = generisiSetKlauzuPotvrda(tblPotvrde, tblPotvrde.getSelectedRow());
 
             Controller.getInstance().updatePotvrda(p, setClause);
-
-            ucitajPotvrde();
         } catch (Exception ex) {
             Logger.getLogger(formPotvrda.class.getName()).log(Level.SEVERE, null, ex);
             JOptionPane.showMessageDialog(null, "Doslo je do greske: " + ex.getMessage(), "Greska", JOptionPane.ERROR_MESSAGE);
+        }
+        finally {
+            try {
+                ucitajPotvrde();
+            } catch (Exception ex) {
+                Logger.getLogger(formPotvrda.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }//GEN-LAST:event_btnIzmeniActionPerformed
 

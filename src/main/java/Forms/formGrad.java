@@ -419,7 +419,6 @@ public class formGrad extends javax.swing.JFrame {
             String setClause = generisiSetKlauzuAdrese(tblAdrese, tblAdrese.getSelectedRow());
             
             Controller.getInstance().updateAdresa(a, setClause);
-            //ucitajAdrese();
             popuniTabeluAdresama(a.getGradID());
         } catch (Exception ex) {
             Logger.getLogger(formGrad.class.getName()).log(Level.SEVERE, null, ex);

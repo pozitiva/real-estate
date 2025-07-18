@@ -1,11 +1,13 @@
 package domain.object.entities;
 
 import domain.object.DomainObject;
+import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Struct;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class Nekretnina extends DomainObject{
 
@@ -68,22 +70,22 @@ public class Nekretnina extends DomainObject{
     
     @Override
     public String getTableName() {
-        return "NEKRETNINA";
+        return "IVA.NEKRETNINA";
     }
 
    @Override
     public String getAllColumnNames() {
-        return "NEKRETNINAID, BROJSTANA, POVRSINA, CENA, BROJPARCELE";
+        return "NEKRETNINAID, NEKRETNINAPODACI, BROJPARCELE";
     }
 
     @Override
     public String getInsertColumnNames() {
-        return "NEKRETNINAID, BROJSTANA, POVRSINA, CENA, BROJPARCELE";
+        return "NEKRETNINAID, NEKRETNINAPODACI, BROJPARCELE";
     }
 
     @Override
     public String getColumnValues() {
-        return String.format("%d,  NEW NEKRETNINAPODACI('%s', %.2f, %.2f), '%s'",
+        return String.format(Locale.US,"%d,  NEW IVA.NEKRETNINA_PODACI('%s', %.2f, %.2f), '%s'",
                 nekretninaID,
                 brojStana,
                 povrsina,
@@ -93,7 +95,7 @@ public class Nekretnina extends DomainObject{
 
     @Override
     public String getUpdateClause() {
-        return String.format("NEKRETNINAID = %d,  NEKRETNINAPODACI = NEKRETNINAPODACI('%s', %.2f, %.2f), BROJPARCELE= '%s'",
+        return String.format(Locale.US, "NEKRETNINAID = %d,  NEKRETNINAPODACI = IVA.NEKRETNINA_PODACI('%s', %.2f, %.2f), BROJPARCELE= '%s'",
                 nekretninaID,
                 brojStana,
                 povrsina,
@@ -113,7 +115,7 @@ public class Nekretnina extends DomainObject{
 
     @Override
     public String getDeleteWhereClause() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return String.format("NEKRETNINAID = %d", nekretninaID);
     }
 
    @Override
@@ -122,11 +124,11 @@ public class Nekretnina extends DomainObject{
 
         while (rs.next()) {
             int nekretninaID = rs.getInt("NEKRETNINAID");
-            Struct struct = (Struct) rs.getObject("LICNIPODACI");
+            Struct struct = (Struct) rs.getObject("NEKRETNINAPODACI");
             Object[] attributes = struct.getAttributes();
             String brojStana = (String) attributes[0];
-            float povrsina = (float) attributes[1];
-            float cena = (float) attributes[2];
+            float povrsina = ((BigDecimal) attributes[1]).floatValue();
+            float cena = ((BigDecimal) attributes[2]).floatValue();
             String brojParcele = rs.getString("BROJPARCELE");
             nekretnine.add(new Nekretnina(nekretninaID, brojStana, povrsina, cena, brojParcele));
         }
