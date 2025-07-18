@@ -782,6 +782,23 @@ public class Controller {
         }
         return javniBeleznici;
     }
+    
+    public void insertJavniBeleznik(JavniBeleznik b) throws Exception {
+        try {
+            db.connect();
+            db.insert(b);
+            JOptionPane.showMessageDialog(null, "Uspesno ste uneli");
+
+        } catch (Exception ex) {
+            throw ex;
+        } finally {
+            try {
+                db.disconnect();
+            } catch (Exception ex) {
+                Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
 
     public void updateJavniBeleznik(JavniBeleznik jb) throws Exception {
         try {

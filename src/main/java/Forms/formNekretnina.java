@@ -19,6 +19,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.table.DefaultTableModel;
@@ -46,6 +47,8 @@ public class formNekretnina extends javax.swing.JFrame {
         ucitajPodatkeUFormu();
         setUpTableListenerNekretnina();
         setUpTableListenerUgovor();
+        
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
 
     /**
@@ -155,14 +158,14 @@ public class formNekretnina extends javax.swing.JFrame {
 
             },
             new String [] {
-                "ID Nekretnine", "Broj Stana", "Povrsina", "Cena"
+                "ID Nekretnine", "Broj Stana", "Povrsina", "Cena", "Broj parcele"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Double.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Double.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -369,7 +372,7 @@ public class formNekretnina extends javax.swing.JFrame {
 
        modelNekretnine.setRowCount(0); 
         for (Nekretnina n: nekretnine) {
-            modelNekretnine.addRow(new Object[]{n.getNekretninaID(), n.getBrojStana(), n.getPovrsina(), n.getCena()});
+            modelNekretnine.addRow(new Object[]{n.getNekretninaID(), n.getBrojStana(), n.getPovrsina(), n.getCena(), n.getBrojParcele()});
         }
          if (cmbNekretnina != null) {
             cmbNekretnina.removeAllItems();
@@ -461,7 +464,8 @@ public class formNekretnina extends javax.swing.JFrame {
         }
         Nekretnina n = new Nekretnina();
         n.setNekretninaID(nekretninaId);
-        return n;            }
+        return n;            
+  }
  
   private void popuniTabeluUgovorima(int idNekretnine) throws Exception {
         DefaultTableModel model = (DefaultTableModel) tblUgovor.getModel();

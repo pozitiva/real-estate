@@ -8,6 +8,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.event.ListSelectionEvent;
@@ -29,6 +30,8 @@ public class formGrad extends javax.swing.JFrame {
         ucitajPodatkeUFormu();
         setUpTableListenerGrad();
         setUpTableListenerAdresa();
+        
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
 
     private void ucitajPodatkeUFormu() throws Exception {
@@ -299,7 +302,7 @@ public class formGrad extends javax.swing.JFrame {
                 java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, true, true, true
+                false, false, true, true
             };
 
             public Class getColumnClass(int columnIndex) {
