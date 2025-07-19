@@ -67,7 +67,7 @@ public class Osoba extends DomainObject {
 
     @Override
     public String getTableName() {
-        return "OSOBA";
+        return "IVA.OSOBA";
     }
 
     @Override

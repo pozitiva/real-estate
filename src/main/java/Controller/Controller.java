@@ -75,7 +75,7 @@ public class Controller {
         return licneKarte;
     }
 
-    public List<LicnaKarta> searchPozicije(String whereClause) throws Exception {
+    public List<LicnaKarta> searchLicneKarte(String whereClause) throws Exception {
         List<LicnaKarta> licneKarte = new LinkedList<>();
         try {
             db.connect();
@@ -617,6 +617,27 @@ public class Controller {
             }
         }
     }
+    
+    public void deleteOsoba(Osoba o) throws Exception {
+        try {
+            db.connect();
+            int answer = JOptionPane.showConfirmDialog(null, "Zaista zelite da obrisete objekat?", "Brisanje", JOptionPane.YES_NO_OPTION);
+            if (answer == 1) {
+                return;
+            }
+            db.delete(o);
+
+        } catch (Exception ex) {
+            throw ex;
+        } finally {
+            try {
+                db.disconnect();
+            } catch (Exception ex) {
+                Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+    
 
     // REZERVACIJA
     public List<Rezervacija> loadSveRezervacije() throws Exception {

@@ -24,15 +24,23 @@ public class MainForm extends javax.swing.JFrame {
 
         jMenuBar2 = new javax.swing.JMenuBar();
         itemFormDoznaka = new javax.swing.JMenu();
+        jMenuItem6 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenuItem5 = new javax.swing.JMenuItem();
-        jMenuItem6 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         itemFormDoznaka.setText("Izaberi formu");
+
+        jMenuItem6.setText("Grad");
+        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem6ActionPerformed(evt);
+            }
+        });
+        itemFormDoznaka.add(jMenuItem6);
 
         jMenuItem2.setText("Potvrda");
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
@@ -50,7 +58,7 @@ public class MainForm extends javax.swing.JFrame {
         });
         itemFormDoznaka.add(jMenuItem3);
 
-        jMenuItem4.setText("Spisak naknada");
+        jMenuItem4.setText("Osoba");
         jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem4ActionPerformed(evt);
@@ -65,14 +73,6 @@ public class MainForm extends javax.swing.JFrame {
             }
         });
         itemFormDoznaka.add(jMenuItem5);
-
-        jMenuItem6.setText("Grad");
-        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem6ActionPerformed(evt);
-            }
-        });
-        itemFormDoznaka.add(jMenuItem6);
 
         jMenuBar2.add(itemFormDoznaka);
 
@@ -113,13 +113,13 @@ public class MainForm extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
-//        try {
-//            formSpisakNaknada fsn = new formSpisakNaknada();
-//            fsn.setVisible(true);
-//        } catch (Exception ex) {
-//            Logger.getLogger(formZaposleni.class.getName()).log(Level.SEVERE, null, ex);
-//            JOptionPane.showMessageDialog(null, "Došlo je do greške: " + ex.getMessage(), "Greška", JOptionPane.ERROR_MESSAGE);
-//        }
+        try {
+            formOsoba o = new formOsoba();
+            o.setVisible(true);
+        } catch (Exception ex) {
+            Logger.getLogger(formOsoba.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Doslo je do greske: " + ex.getMessage(), "Greska", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed

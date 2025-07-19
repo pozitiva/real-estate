@@ -59,7 +59,7 @@ public class LicnaKarta extends DomainObject {
 
     @Override
     public String getTableName() {
-        return "LICNAKARTA";
+        return "IVA.LICNAKARTA";
     }
 
     @Override
