@@ -64,7 +64,7 @@ public class DatabaseBroker {
     public List<DomainObject> getPartition(DomainObject object, String part) throws SQLException {
         try {
             Statement statement = connection.createStatement();
-            String query = "SELECT * FROM UGOVOROKUPOPRODAJI " + part;
+            String query = "SELECT * FROM IVA.UGOVOROKUPOPRODAJI " + part;
             ResultSet rs = statement.executeQuery(query);
 
             return object.getObjectsFromResultSet(rs);

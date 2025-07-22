@@ -69,7 +69,7 @@ public class Rezervacija extends DomainObject{
 
     @Override
     public String getTableName() {
-        return "REZERVACIJA";
+        return "IVA.REZERVACIJA";
     }
 
     @Override
@@ -131,7 +131,7 @@ public class Rezervacija extends DomainObject{
         int rezervacijaID= rs.getInt("REZERVACIJAID");
         Date datumRezervacije = rs.getDate("DATUMREZERVACIJE");
         float kupoprodajnaCena = rs.getFloat("KUPOPRODAJNACENA");
-        int ugovorOPosredovanjuID= rs.getInt("UGOVOROPOSREDOVANJU");
+        int ugovorOPosredovanjuID= rs.getInt("UGOVOROPOSREDOVANJUID");
         float ukupnoZaIsplatu = rs.getFloat("UKUPNOZAISPLATU");
         
         rezervacije.add(new Rezervacija(rezervacijaID, datumRezervacije, kupoprodajnaCena, ugovorOPosredovanjuID, ukupnoZaIsplatu));

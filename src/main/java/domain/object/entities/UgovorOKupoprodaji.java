@@ -49,7 +49,7 @@ public class UgovorOKupoprodaji extends DomainObject {
 
     @Override
     public String getTableName() {
-        return "UGOVOROKUPOPRODAJI u";
+        return "IVA.UGOVOROKUPOPRODAJI u";
     }
 
     @Override
@@ -68,15 +68,22 @@ public class UgovorOKupoprodaji extends DomainObject {
         String datumPotpisivanjaStr = datumPotpisivanja != null ? 
             "TO_DATE('" + sdf.format(datumPotpisivanja) + "', 'DD-MM-YY')" : "NULL";
 
-        return String.format("%d, '%s', %d",
+        return String.format("%d, %s, %d",
                 ugovorOKupoprodajiID,
                 datumPotpisivanjaStr,
                 rezervacijaID);
     }
-
+    
     @Override
     public String getUpdateClause() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yy");
+        String datumPotpisivanjaStr = datumPotpisivanja != null ? 
+            "TO_DATE('" + sdf.format(datumPotpisivanja) + "', 'DD-MM-YY')" : "NULL";
+        
+        return String.format("UGOVOROKUPOPRODAJIID = %d, DATUMPOTPISIVANJA = %s, REZERVACIJAID = %d",
+                ugovorOKupoprodajiID,
+                datumPotpisivanjaStr,
+                rezervacijaID);
     }
 
     @Override
