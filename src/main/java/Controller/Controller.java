@@ -1007,6 +1007,24 @@ public class Controller {
     }
     
     // NEKRETNINA PRODAVCA
+    
+    public void insertNekretninaProdavca(NekretninaProdavca n) throws Exception {
+        try {
+            db.connect();
+            db.insert(n);
+            JOptionPane.showMessageDialog(null, "Uspesno ste uneli");
+
+        } catch (Exception ex) {
+            throw ex;
+        } finally {
+            try {
+                db.disconnect();
+            } catch (Exception ex) {
+                Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+    
     public List<NekretninaProdavca> loadSveNekretnineProdavca() throws Exception {
         List<NekretninaProdavca> nekretnineProdavca = new LinkedList<>();
         try {

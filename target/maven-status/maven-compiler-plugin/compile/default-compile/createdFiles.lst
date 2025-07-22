@@ -4,6 +4,7 @@ domain\object\entities\KatastarskaParcela.class
 Forms\formPotvrda$6.class
 Forms\MainForm$4.class
 Forms\formUgovorKupoprodaja$6.class
+Forms\formNekretnineProdavca.class
 Forms\MainForm.class
 Forms\formPotvrda$2.class
 Forms\MainForm$1.class
@@ -16,6 +17,7 @@ Forms\formOsoba$1.class
 domain\object\entities\Osoba.class
 Forms\formPotvrda$5.class
 Forms\formGrad$2.class
+Forms\formNekretnineProdavca$2.class
 Forms\formNekretnina$7.class
 DataBase\DatabaseBroker.class
 Forms\MainForm$5.class
@@ -41,6 +43,7 @@ Forms\formNekretnina$3.class
 Forms\MainForm$6.class
 Forms\formGrad$1.class
 Forms\formGrad$4.class
+Forms\formNekretnineProdavca$1.class
 Forms\formPotvrda$7.class
 Forms\MainForm$3.class
 domain\object\entities\UgovorOPosredovanju.class
@@ -55,6 +58,7 @@ domain\object\entities\Zapisnik.class
 Forms\formUgovorKupoprodaja$5.class
 Forms\formOsoba$5.class
 Forms\formNekretnina.class
+Forms\MainForm$7.class
 Forms\formUgovorKupoprodaja.class
 Forms\formUgovorKupoprodaja$2.class
 domain\object\entities\Grad.class

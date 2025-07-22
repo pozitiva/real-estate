@@ -58,22 +58,22 @@ public class NekretninaProdavca extends DomainObject {
 
     @Override
     public String getTableName() {
-        return "NEKRETNINAPRODAVCA np";
+        return "IVA.NEKRETNINAPRODAVCA np";
     }
 
     @Override
     public String getAllColumnNames() {
-        return "np.NEKRETNINAID, np.JMBG, np.UDEOVLASNISTVA, np.OSNOVSTICANJA";
+        return "np.NEKRETNINAID, np.JMBG, np.UDEOVLASNISTVA, np.OSNOV_STICANJA";
     }
 
     @Override
     public String getInsertColumnNames() {
-        return "NEKRETNINAID, JMBG, UDEOVLASNISTVA, OSNOVSTICANJA";
+        return "NEKRETNINAID, JMBG, UDEOVLASNISTVA, OSNOV_STICANJA";
     }
 
     @Override
     public String getColumnValues() {
-        return String.format("%d, '%s', '%s', osnov_sticanja('%s')",
+        return String.format("%d, '%s', '%s', IVA.OSNOV_STICANJA('%s')",
                 nekretninaID,
                 jmbg,
                 udeoVlasnistva,
@@ -108,7 +108,7 @@ public class NekretninaProdavca extends DomainObject {
             int nekretninaID = rs.getInt("NEKRETNINAID");
             String jmbg = rs.getString("JMBG");
             String udeoVlasnistva = rs.getString("UDEOVLASNISTVA");
-            Struct struct = (Struct) rs.getObject("OSNOVSTICANJA");
+            Struct struct = (Struct) rs.getObject("OSNOV_STICANJA");
             Object[] attributes = struct.getAttributes();
             String osnovSticanja = attributes[0] != null ? attributes[0].toString() : null;
             
