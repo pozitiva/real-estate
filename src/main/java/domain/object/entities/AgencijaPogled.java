@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Agencija_Pogled extends DomainObject {
+public class AgencijaPogled extends DomainObject {
 
     private String maticniBroj;
     private String naziv;
@@ -15,10 +15,10 @@ public class Agencija_Pogled extends DomainObject {
     private int adresaID;
     private int gradID;
 
-    public Agencija_Pogled() {
+    public AgencijaPogled() {
     }
 
-    public Agencija_Pogled(String maticniBroj, String naziv, String pib, String vlasnik, int adresaID, int gradID) {
+    public AgencijaPogled(String maticniBroj, String naziv, String pib, String vlasnik, int adresaID, int gradID) {
         this.maticniBroj = maticniBroj;
         this.naziv = naziv;
         this.pib = pib;
@@ -87,18 +87,12 @@ public class Agencija_Pogled extends DomainObject {
 
     @Override
     public String getInsertColumnNames() {
-        return String.format("'%s', '%s', '%s','%s', %d, %d",
-               maticniBroj,
-               naziv,
-               pib,
-               vlasnik,
-               adresaID,
-               gradID);
+        return "MATICNIBROJ, NAZIV, PIB, VLASNIK, ADRESAID, GRADID";
     }
 
     @Override
     public String getColumnValues() {
-    return String.format("MATICNIBROJ = '%s', NAZIV = '%s', PIB = '%s',VLASNIK = '%s', ADRESAID = %d, GRADID = %d",
+    return String.format("'%s', '%s', '%s','%s', %d, %d",
                maticniBroj,
                naziv,
                pib,
@@ -108,7 +102,13 @@ public class Agencija_Pogled extends DomainObject {
 
     @Override
     public String getUpdateClause() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return String.format("MATICNIBROJ = '%s', NAZIV = '%s', PIB = '%s',VLASNIK = '%s', ADRESAID = %d, GRADID = %d",
+               maticniBroj,
+               naziv,
+               pib,
+               vlasnik,
+               adresaID,
+               gradID);
     }
 
     @Override
@@ -138,7 +138,7 @@ public class Agencija_Pogled extends DomainObject {
             int adresaID= rs.getInt("ADRESAID");
             int gradID= rs.getInt("GRADID");
             
-            agencije.add(new Agencija_Pogled(maticniBroj, naziv, pib,vlasnik, adresaID, gradID));
+            agencije.add(new AgencijaPogled(maticniBroj, naziv, pib,vlasnik, adresaID, gradID));
         }
     
         return agencije;

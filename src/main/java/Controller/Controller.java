@@ -2,8 +2,8 @@ package Controller;
 
 import DataBase.DatabaseBroker;
 import domain.object.entities.Adresa;
-import domain.object.entities.Agencija_Osnovno;
-import domain.object.entities.Agencija_Pogled;
+import domain.object.entities.AgencijaOsnovno;
+import domain.object.entities.AgencijaPogled;
 import domain.object.entities.Grad;
 import domain.object.entities.JavniBeleznik;
 import domain.object.entities.KatastarskaParcela;
@@ -167,7 +167,7 @@ public class Controller {
         }
     }
     // AGENCIJA POGLED
-    public void insertAgencijaPogled(Agencija_Pogled ap) throws Exception {
+    public void insertAgencijaPogled(AgencijaPogled ap) throws Exception {
         try {
             db.connect();
             db.insert(ap);
@@ -184,11 +184,11 @@ public class Controller {
         }
     }
 
-    public List<Agencija_Pogled> loadSveAgencije() throws Exception {
-        List<Agencija_Pogled> agencije = new LinkedList<>();
+    public List<AgencijaPogled> loadSveAgencije() throws Exception {
+        List<AgencijaPogled> agencije = new LinkedList<>();
         try {
             db.connect();
-            agencije = (List<Agencija_Pogled>) (Object) db.getAll(new Agencija_Pogled());
+            agencije = (List<AgencijaPogled>) (Object) db.getAll(new AgencijaPogled());
         } catch (Exception ex) {
             throw ex;
         } finally {
@@ -201,7 +201,7 @@ public class Controller {
         return agencije;
     }
 
-    public void deleteAgencija(Agencija_Pogled ap) throws Exception {
+    public void deleteAgencija(AgencijaPogled ap) throws Exception {
         try {
             db.connect();
             int answer = JOptionPane.showConfirmDialog(null, "Zaista zelite da obrisete objekat?", "Brisanje", JOptionPane.YES_NO_OPTION);
@@ -221,11 +221,11 @@ public class Controller {
         }
     }
 
-    public List<Agencija_Pogled> searchAgencije(String whereClause) throws Exception {
-        List<Agencija_Pogled> agencije = new LinkedList<>();
+    public List<AgencijaPogled> searchAgencije(String whereClause) throws Exception {
+        List<AgencijaPogled> agencije = new LinkedList<>();
         try {
             db.connect();
-            agencije = (List<Agencija_Pogled>) (Object) db.getAllWithWhere(new Agencija_Pogled(), whereClause);
+            agencije = (List<AgencijaPogled>) (Object) db.getAllWithWhere(new AgencijaPogled(), whereClause);
         } catch (Exception ex) {
             throw ex;
         } finally {
@@ -238,7 +238,7 @@ public class Controller {
         return agencije;
     }
 
-    public void updateAgencija(Agencija_Pogled ap) throws Exception {
+    public void updateAgencija(AgencijaPogled ap) throws Exception {
         try {
             db.connect();
             int answer = JOptionPane.showConfirmDialog(null, "Zelite li da izmenite agenciju?", "Izmena", JOptionPane.YES_NO_OPTION);
@@ -260,11 +260,11 @@ public class Controller {
     }
 
     // AGENCIJA OSNOVNO
-    public List<Agencija_Osnovno> loadSveAgencijeOsnovno() throws Exception {
-        List<Agencija_Osnovno> agencije = new LinkedList<>();
+    public List<AgencijaOsnovno> loadSveAgencijeOsnovno() throws Exception {
+        List<AgencijaOsnovno> agencije = new LinkedList<>();
         try {
             db.connect();
-            agencije = (List<Agencija_Osnovno>) (Object) db.getAll(new Agencija_Osnovno());
+            agencije = (List<AgencijaOsnovno>) (Object) db.getAll(new AgencijaOsnovno());
         } catch (Exception ex) {
             throw ex;
         } finally {

@@ -6,16 +6,16 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Agencija_Osnovno extends DomainObject{
+public class AgencijaOsnovno extends DomainObject{
     
     private String maticniBroj;
     private String naziv;
     private String pib;
 
-    public Agencija_Osnovno() {
+    public AgencijaOsnovno() {
     }
 
-    public Agencija_Osnovno(String maticniBroj, String naziv, String pib) {
+    public AgencijaOsnovno(String maticniBroj, String naziv, String pib) {
         this.maticniBroj = maticniBroj;
         this.naziv = naziv;
         this.pib = pib;
@@ -48,7 +48,7 @@ public class Agencija_Osnovno extends DomainObject{
    
     @Override
     public String getTableName() {
-        return "AGENCIJA_OSNOVNO";
+        return "IVA.AGENCIJA_OSNOVNO";
     }
 
     @Override
@@ -95,7 +95,7 @@ public class Agencija_Osnovno extends DomainObject{
             String naziv = rs.getString("NAZIV");
             String pib = rs.getString("PIB");
             
-            agencije.add(new Agencija_Osnovno(maticniBroj, naziv, pib));
+            agencije.add(new AgencijaOsnovno(maticniBroj, naziv, pib));
         } 
         return agencije;
     }

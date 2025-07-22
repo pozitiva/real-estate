@@ -5,7 +5,7 @@
 package Forms;
 
 import Controller.Controller;
-import domain.object.entities.Agencija_Pogled;
+import domain.object.entities.AgencijaPogled;
 import domain.object.entities.KatastarskaParcela;
 import domain.object.entities.Nekretnina;
 import domain.object.entities.UgovorOPosredovanju;
@@ -36,7 +36,7 @@ public class formNekretnina extends javax.swing.JFrame {
     List<KatastarskaParcela> pronadjeneParcele = new LinkedList<>();
     List<UgovorOPosredovanju> ugovori = new LinkedList<>();
     List<UgovorOPosredovanju> pronadjeniUgovori = new LinkedList<>();
-    List<Agencija_Pogled> agencije = new LinkedList<>();
+    List<AgencijaPogled> agencije = new LinkedList<>();
 
     private final HashMap<Integer, String[]> originalneVrednostiNekretnine = new HashMap<>();
 
@@ -386,7 +386,7 @@ public class formNekretnina extends javax.swing.JFrame {
         agencije= Controller.getInstance().loadSveAgencije(); 
         if (cmbAgencija != null) {
             cmbAgencija.removeAllItems();
-            for (Agencija_Pogled a : agencije) {
+            for (AgencijaPogled a : agencije) {
                 cmbAgencija.addItem(a.getNaziv());
             }
         } else {
@@ -521,7 +521,7 @@ public class formNekretnina extends javax.swing.JFrame {
             txtDatum.setText(dateFormat.format(izabranUgovor.getDatumPotpisivanja()));
 
             if (izabranUgovor.getAgencijaID()!= null) {
-                List<Agencija_Pogled> agencija = Controller.getInstance().searchAgencije("MATICNIBROJ='" + izabranUgovor.getAgencijaID() + "'");
+                List<AgencijaPogled> agencija = Controller.getInstance().searchAgencije("MATICNIBROJ='" + izabranUgovor.getAgencijaID() + "'");
                 if (!agencija.isEmpty()) {
                     cmbAgencija.setSelectedItem(agencija.get(0).toString());
                 }
@@ -574,7 +574,7 @@ public class formNekretnina extends javax.swing.JFrame {
         int idNekretnine = Integer.parseInt((String) cmbNekretnina.getSelectedItem());
         
         String agencija = (String) cmbAgencija.getSelectedItem();
-        List<Agencija_Pogled> pronadjeneAgencije = Controller.getInstance().searchAgencije("naziv='" + agencija + "'");
+        List<AgencijaPogled> pronadjeneAgencije = Controller.getInstance().searchAgencije("naziv='" + agencija + "'");
 
         if (pronadjeneAgencije.isEmpty()) {
             throw new Exception("Agencija sa imenom " + agencija + " nije pronadjena.");
