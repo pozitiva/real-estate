@@ -411,7 +411,7 @@ private void popuniFormuIzabranimUgovorom(UgovorOKupoprodaji u) throws Exception
                 ugovori = Controller.getInstance().getParticijeUgovori("PARTITION (DP3)");
             }
             if (rbDP4.isSelected()) {
-                ugovori = Controller.getInstance().getParticijeUgovori("PARTITION (DP3)");
+                ugovori = Controller.getInstance().getParticijeUgovori("PARTITION (DP4)");
             }
             ucitajUgovore(true);
         } catch (Exception ex) {

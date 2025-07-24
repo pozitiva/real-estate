@@ -711,6 +711,24 @@ public class Controller {
     }
 
     // STAVKA REZERVACIJE
+    
+    public List<StavkaRezervacije> loadSveStavkeRezervacije() throws Exception {
+        List<StavkaRezervacije> stavke = new LinkedList<>();
+        try {
+            db.connect();
+            stavke = (List<StavkaRezervacije>) (Object) db.getAll(new StavkaRezervacije());
+        } catch (Exception ex) {
+            throw ex;
+        } finally {
+            try {
+                db.disconnect();
+            } catch (Exception ex) {
+                Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return stavke;
+    }
+    
     public List<StavkaRezervacije> searchStavkeRezervacije(String whereClause) throws Exception {
         List<StavkaRezervacije> stavkeRezervacije = new LinkedList<>();
         try {

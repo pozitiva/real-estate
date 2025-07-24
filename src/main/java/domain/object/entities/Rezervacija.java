@@ -84,10 +84,10 @@ public class Rezervacija extends DomainObject{
 
     @Override
     public String getColumnValues() {
-      SimpleDateFormat sdf = new SimpleDateFormat("dd-MMM-yyyy");
-      String datumRezervacijeStr = datumRezervacije != null ? "TO_DATE('" + sdf.format(datumRezervacije) + "' 'dd-MMM-yyy'" : "NULL";
+      SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yy");
+      String datumRezervacijeStr = datumRezervacije != null ? "TO_DATE('" + sdf.format(datumRezervacije) + "' 'dd-MM-yy'" : "NULL";
       
-      return String.format("%d, '%s', %.2f, %d, %.2f", 
+      return String.format("%d, %s, %.2f, %d, %.2f", 
               rezervacijaID,
               datumRezervacijeStr,
               kupoprodajnaCena,
@@ -97,10 +97,11 @@ public class Rezervacija extends DomainObject{
 
     @Override
     public String getUpdateClause() {
-      SimpleDateFormat sdf = new SimpleDateFormat("dd-MMM-yyyy");
-      String datumRezervacijeStr = datumRezervacije != null ? "TO_DATE('" + sdf.format(datumRezervacije) + "' 'dd-MMM-yyy'" : "NULL";
+      SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yy");
+      String datumRezervacijeStr = datumRezervacije != null ? 
+              "TO_DATE('" + sdf.format(datumRezervacije) + "' 'DD-MM-YY'" : "NULL";
       
-     return String.format("REZERVACIJAID = %d, DATUMREZERVACIJE = '%s', KUPOPRODAJNACENA = %.2f, UGOVOROPOSREDOVANJUID = %d, UKUPNOZAISPLATU = %.2f", 
+     return String.format("REZERVACIJAID = %d, DATUMREZERVACIJE = %s, KUPOPRODAJNACENA = %.2f, UGOVOROPOSREDOVANJUID = %d, UKUPNOZAISPLATU = %.2f", 
               rezervacijaID,
               datumRezervacijeStr,
               kupoprodajnaCena,
@@ -110,12 +111,12 @@ public class Rezervacija extends DomainObject{
 
     @Override
     public String getWhereIdClause() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+       return String.format("REZERVACIJAID = %d", this.getRezervacijaID());
     }
 
     @Override
     public String getUpdateWhereClause() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return String.format("REZERVACIJAID = %d", rezervacijaID);
     }
 
     @Override

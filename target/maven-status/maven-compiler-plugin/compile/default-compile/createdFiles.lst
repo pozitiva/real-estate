@@ -1,3 +1,4 @@
+Forms\formRezervacija$4.class
 Forms\formGrad$3.class
 Forms\formNekretnina$1.class
 domain\object\entities\AgencijaOsnovno.class
@@ -10,6 +11,7 @@ Forms\formAgencija$2.class
 Forms\formZapisnik$3.class
 Forms\MainForm.class
 Forms\formPotvrda$2.class
+Forms\formRezervacija$1.class
 Forms\MainForm$1.class
 Forms\formGrad$6.class
 Forms\MainForm$8.class
@@ -26,12 +28,14 @@ Forms\formNekretnineProdavca$2.class
 Forms\formNekretnina$7.class
 Forms\formZapisnik$4.class
 DataBase\DatabaseBroker.class
+Forms\formRezervacija$5.class
 Forms\MainForm$5.class
 Forms\formOsoba$4.class
 Forms\formGrad$5.class
 Forms\MainForm$2.class
 Forms\formZapisnik$1.class
 domain\object\DomainObject.class
+Forms\formRezervacija$2.class
 Forms\formNekretnina$4.class
 Forms\formUgovorKupoprodaja$7.class
 domain\object\entities\Rezervacija.class
@@ -48,10 +52,12 @@ Forms\formNekretnina$6.class
 Forms\formZapisnik.class
 Forms\formUgovorKupoprodaja$1.class
 Forms\formNekretnina$3.class
+Forms\formRezervacija$6.class
 Forms\MainForm$6.class
 Forms\formAgencija$3.class
 domain\object\entities\AgencijaPogled.class
 Forms\formGrad$1.class
+Forms\formRezervacija$3.class
 Forms\formGrad$4.class
 Forms\formNekretnineProdavca$1.class
 Forms\formPotvrda$7.class
@@ -74,9 +80,11 @@ Forms\formNekretnina.class
 Forms\MainForm$7.class
 Forms\formUgovorKupoprodaja.class
 Forms\formUgovorKupoprodaja$2.class
+Forms\formRezervacija.class
 domain\object\entities\Grad.class
 domain\object\entities\Adresa.class
 Forms\formOsoba.class
 Forms\formPotvrda.class
 domain\object\entities\JavniBeleznik.class
 Forms\formPotvrda$3.class
+Forms\formRezervacija$7.class

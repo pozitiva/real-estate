@@ -5,6 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class StavkaRezervacije extends DomainObject {
 
@@ -57,7 +58,7 @@ public class StavkaRezervacije extends DomainObject {
     
     @Override
     public String getTableName() {
-        return "STAVKAREZERVACIJE";
+        return "IVA.STAVKAREZERVACIJE";
     }
 
     @Override
@@ -72,7 +73,7 @@ public class StavkaRezervacije extends DomainObject {
 
     @Override
     public String getColumnValues() {
-        return String.format("%d, %d, '%s', %.2f",
+        return String.format(Locale.US, "%d, %d, '%s', %.2f",
              stavkaRezervacijeID,
              rezervacijaID,
              opis,
@@ -81,7 +82,7 @@ public class StavkaRezervacije extends DomainObject {
 
     @Override
     public String getUpdateClause() {
-    return String.format("STAVKAREZERVACIJEID = %d, REZERVACIJAID = %d, OPIS = '%s', ZAISPLATU = %.2f",
+    return String.format(Locale.US, "STAVKAREZERVACIJEID = %d, REZERVACIJAID = %d, OPIS = '%s', ZAISPLATU = %.2f",
              stavkaRezervacijeID,
              rezervacijaID,
              opis,
@@ -90,17 +91,17 @@ public class StavkaRezervacije extends DomainObject {
 
     @Override
     public String getWhereIdClause() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return String.format("STAVKAREZERVACIJEID = %d", this.getStavkaRezervacijeID());
     }
 
     @Override
     public String getUpdateWhereClause() {
-        return String.format("STAVKAREZERVACIJAID = %d AND REZERVACIJAID= %d", this.getStavkaRezervacijeID(), this.getRezervacijaID());
+        return String.format("STAVKAREZERVACIJEID = %d AND REZERVACIJAID= %d", this.getStavkaRezervacijeID(), this.getRezervacijaID());
     }
 
     @Override
     public String getDeleteWhereClause() {
-        return String.format("STAVKAREZERVACIJAID = %d AND REZERVACIJAID= %d", this.getStavkaRezervacijeID(), this.getRezervacijaID());
+        return String.format("STAVKAREZERVACIJEID = %d AND REZERVACIJAID= %d", this.getStavkaRezervacijeID(), this.getRezervacijaID());
     }
 
     @Override
