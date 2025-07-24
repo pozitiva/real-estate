@@ -15,6 +15,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.event.ListSelectionEvent;
@@ -37,6 +38,8 @@ public class formUgovorKupoprodaja extends javax.swing.JFrame {
         setLocationRelativeTo(this);
         ucitajPodatkeUFormu();
         setUpTableListener();
+        
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
 
     

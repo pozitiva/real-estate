@@ -60,7 +60,7 @@ public class Zapisnik extends DomainObject {
     
     @Override
     public String getTableName() {
-        return "ZAPISNIK";
+        return "IVA.ZAPISNIK";
     }
 
     @Override
@@ -78,7 +78,7 @@ public class Zapisnik extends DomainObject {
        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yy");
        String datumPrimopredajeStr= datumPrimopredaje != null ? "TO_DATE('" + sdf.format(datumPrimopredaje) + "', 'DD-MM-YY')" : "NULL";
        
-       return String.format("%d , '%s', '%s', %d", 
+       return String.format("%d , %s, '%s', %d", 
                zapisnikID,
                datumPrimopredajeStr,
                tip,
@@ -87,7 +87,14 @@ public class Zapisnik extends DomainObject {
 
     @Override
     public String getUpdateClause() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+       SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yy");
+       String datumPrimopredajeStr= datumPrimopredaje != null ? "TO_DATE('" + sdf.format(datumPrimopredaje) + "', 'DD-MM-YY')" : "NULL";
+       
+       return String.format("ZAPISNIKID = %d , DATUMPRIMOPREDAJE = %s, TIP ='%s', POTVRDAID = %d", 
+               zapisnikID,
+               datumPrimopredajeStr,
+               tip,
+               potvrdaID);
     }
 
     @Override
@@ -102,7 +109,7 @@ public class Zapisnik extends DomainObject {
 
     @Override
     public String getDeleteWhereClause() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return String.format("ZAPISNIKID = '%s'", zapisnikID);
     }
 
     @Override

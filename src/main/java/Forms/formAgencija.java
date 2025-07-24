@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.table.DefaultTableModel;
@@ -36,6 +37,8 @@ public class formAgencija extends javax.swing.JFrame {
         setLocationRelativeTo(this);
         ucitajPodatkeUFormu();
         setUpTableListener();
+        
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
    
 

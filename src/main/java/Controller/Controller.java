@@ -1164,16 +1164,53 @@ public class Controller {
         return zapisnici;
     }
 
-    public void updateZapisnik(Zapisnik z, String setClause) throws Exception {
+    public void updateZapisnik(Zapisnik z) throws Exception {
         try {
             db.connect();
             int answer = JOptionPane.showConfirmDialog(null, "Zelite li da izmenite zapisnik?", "Izmena", JOptionPane.YES_NO_OPTION);
             if (answer == JOptionPane.YES_OPTION) {
-                db.updatePartial(z, setClause);
+                db.update(z);
                 JOptionPane.showMessageDialog(null, "Uspesno ste izmenili");
             }
         } catch (Exception ex) {
            throw ex;
+        } finally {
+            try {
+                db.disconnect();
+            } catch (Exception ex) {
+                Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+    
+    public void insertZapisnik (Zapisnik p) throws Exception {
+        try {
+            db.connect();
+            db.insert(p);
+            JOptionPane.showMessageDialog(null, "Uspesno ste uneli");
+
+        } catch (Exception ex) {
+            throw ex;
+        } finally {
+            try {
+                db.disconnect();
+            } catch (Exception ex) {
+                Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+    
+    public void deleteZapisnik(Zapisnik z) throws Exception {
+        try {
+            db.connect();
+            int answer = JOptionPane.showConfirmDialog(null, "Zaista zelite da obrisete objekat?", "Brisanje", JOptionPane.YES_NO_OPTION);
+            if (answer == 1) {
+                return;
+            }
+            db.delete(z);
+
+        } catch (Exception ex) {
+            throw ex;
         } finally {
             try {
                 db.disconnect();
