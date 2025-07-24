@@ -40,7 +40,7 @@ public class formRezervacija extends javax.swing.JFrame {
         initComponents();
         setTitle("StavkaRezervacije");
         setLocationRelativeTo(this);
-        ucitajPodatkeUFormu();
+        ucitajStavke();
         ucitajRezervacije();
         setUpTableListenerStavkaRezervacije();
         setUpTableListenerRezervacija();
@@ -130,7 +130,7 @@ public class formRezervacija extends javax.swing.JFrame {
                 java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                false, true, true, true
+                false, false, false, true
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -284,21 +284,17 @@ public class formRezervacija extends javax.swing.JFrame {
         }
     }
     
-    private void ucitajPodatkeUFormu() throws Exception {
+    private void ucitajStavke() throws Exception {
         stavke = Controller.getInstance().loadSveStavkeRezervacije();
         DefaultTableModel model = (DefaultTableModel) tblStavka.getModel();
         model.setRowCount(0); 
         
-        
-
         for (StavkaRezervacije s : stavke) {
             model.addRow(new Object[]{s.getStavkaRezervacijeID(), s.getRezervacijaID(), s.getOpis(), s.getZaIsplatu()});
-
         }
     }
 
     private void ucitajRezervacije() throws Exception {
-
         rezervacije = Controller.getInstance().loadSveRezervacije();
         DefaultTableModel model = (DefaultTableModel) tblRezervacija.getModel();
         model.setRowCount(0);
@@ -322,14 +318,17 @@ public class formRezervacija extends javax.swing.JFrame {
     
     private StavkaRezervacije jeIzabranaStavka() {
     int stavkaId = 0;
+    int rezervacijaId=0;
     int izabranaStavkaIndeks = tblStavka.getSelectedRow();
     
     if (izabranaStavkaIndeks >= 0) {
         DefaultTableModel model = (DefaultTableModel) tblStavka.getModel();
         Object izabraniId = model.getValueAt(izabranaStavkaIndeks, 0);
+        Object izabraniRezervacijaId= model.getValueAt(izabranaStavkaIndeks,1);
         
         try {
             stavkaId = Integer.parseInt(izabraniId.toString());
+            rezervacijaId= Integer.parseInt(izabraniRezervacijaId.toString());
         } catch (NumberFormatException e) {
             System.err.println("Greska pri parsiranju ugovora id: " + e.getMessage());
         }
@@ -337,6 +336,7 @@ public class formRezervacija extends javax.swing.JFrame {
     
     StavkaRezervacije u = new StavkaRezervacije();
     u.setStavkaRezervacijeID(stavkaId);
+    u.setRezervacijaID(rezervacijaId);
     return u;
 }
     
@@ -436,13 +436,13 @@ public class formRezervacija extends javax.swing.JFrame {
         if (pronadjenRezervacija.isEmpty()) {
             throw new Exception("Rezervacija nije pronadjena.");
         }
-        int id_objekta = pronadjenRezervacija.get(0).getRezervacijaID();
+        int rezervacijaId = pronadjenRezervacija.get(0).getRezervacijaID();
 
-        StavkaRezervacije snaga = new StavkaRezervacije(stavkaId, id_objekta, naziv, zaIsplatu);
+        StavkaRezervacije stavka = new StavkaRezervacije(stavkaId, rezervacijaId, naziv, zaIsplatu);
 
-        return snaga;
+        return stavka;
     }
-
+  
     public String generisiSetKlauzuRezervacija(JTable table, int selectedRow) {
         DefaultTableModel model = (DefaultTableModel) table.getModel();
         StringBuilder setClause = new StringBuilder();
@@ -460,8 +460,8 @@ public class formRezervacija extends javax.swing.JFrame {
         //String kupoprodajnaCena = model.getValueAt(selectedRow, 2) != null ? model.getValueAt(selectedRow, 2).toString() : "";
         String ukupnoZaisplatu = model.getValueAt(selectedRow, 3) != null ? model.getValueAt(selectedRow, 3).toString() : "0";
        // String originalniDatum = original[0];
-        String originalnaKupoprodajnaCena = original[1];
-        String originalUkupnaStavkaRezervacije = original[2];
+        //String originalnaKupoprodajnaCena = original[1];
+        String originalnoUkupnoZaIsplatu = original[3];
 
 //        if (!datum.equals(originalniDatum)) {
 //            setClause.append("DATUMREZERVACIJE = '").append(datum).append("'");
@@ -470,7 +470,7 @@ public class formRezervacija extends javax.swing.JFrame {
 //        if (!kupoprodajnaCena.equals(originalnaKupoprodajnaCena)) {
 //            setClause.append("KUPOPRODAJNACENA = '").append(kupoprodajnaCena).append("'");
 //        }
-        if (!ukupnoZaisplatu.equals(originalUkupnaStavkaRezervacije)) {
+        if (!ukupnoZaisplatu.equals(originalnoUkupnoZaIsplatu)) {
             if (setClause.length() > 0) {
                 setClause.append(", ");
             }
@@ -489,7 +489,7 @@ public class formRezervacija extends javax.swing.JFrame {
 
             Controller.getInstance().insertStavkaRezervacije(stavka);
 
-            ucitajPodatkeUFormu();
+            ucitajStavke();
             ucitajRezervacije();
         } catch (Exception ex) {
             Logger.getLogger(formRezervacija.class.getName()).log(Level.SEVERE, null, ex);
@@ -500,10 +500,8 @@ public class formRezervacija extends javax.swing.JFrame {
     private void btnIzmeniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIzmeniActionPerformed
         try {
             StavkaRezervacije stavka = preuzmiPodatkeZaStavku();
-
             Controller.getInstance().updateStavkaRezervacije(stavka);
-
-            ucitajPodatkeUFormu();
+            ucitajStavke();
             ucitajRezervacije();
         } catch (Exception ex) {
             Logger.getLogger(formRezervacija.class.getName()).log(Level.SEVERE, null, ex);
@@ -513,11 +511,9 @@ public class formRezervacija extends javax.swing.JFrame {
 
     private void btnObrisiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnObrisiActionPerformed
         try {
-            StavkaRezervacije snaga = jeIzabranaStavka();
-
-            Controller.getInstance().deleteStavkaRezervacije(snaga);
-
-            ucitajPodatkeUFormu();
+            StavkaRezervacije stavka = jeIzabranaStavka();
+            Controller.getInstance().deleteStavkaRezervacije(stavka);
+            ucitajStavke();
             ucitajRezervacije();
 
         } catch (Exception ex) {
@@ -529,11 +525,8 @@ public class formRezervacija extends javax.swing.JFrame {
     private void btnIzmeniRezervacijuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIzmeniRezervacijuActionPerformed
         try {
             Rezervacija o = jeIzabranRezervacija();
-
             String setClause = generisiSetKlauzuRezervacija(tblRezervacija, tblRezervacija.getSelectedRow());
-
             Controller.getInstance().updateRezervacija(o, setClause);
-
             ucitajRezervacije();
         } catch (Exception ex) {
             Logger.getLogger(formRezervacija.class.getName()).log(Level.SEVERE, null, ex);

@@ -91,7 +91,7 @@ public class StavkaRezervacije extends DomainObject {
 
     @Override
     public String getWhereIdClause() {
-        return String.format("STAVKAREZERVACIJEID = %d", this.getStavkaRezervacijeID());
+        return String.format("STAVKAREZERVACIJEID = %d AND REZERVACIJAID= %d", this.getStavkaRezervacijeID());
     }
 
     @Override
